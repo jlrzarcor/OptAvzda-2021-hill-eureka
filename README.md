@@ -1,4 +1,4 @@
-# Maestría en Ciencia de Datos, ITAM
+# Maestría en Ciencia de Datos,
 
 <p align = "center">
     <img src="images/logo_itam.png" width="300" height="110" />
@@ -11,7 +11,22 @@
 
 **Proyecto Final**
 
-_______
+-------
+
+
+**Equipo 5.**
+
+
+| Github_User | Alumno |
+|:---:|:---|
+| @lobolc | Miguel |
+| @Carlosrlpzi | Carlos |
+| @ZarCorvus | José Luis* |
+
+* _Project Manager_
+
+-------
+
 
 #### Título del proyecto:  
 
@@ -45,22 +60,11 @@ se incrementa el tamaño del conjunto, este método requiere mayor tiempo para e
 * Utilizar estrategias de solución como el uso de Kubernetes (minikube) con contenedore de Docker. 
 buscando obtener soluciones más cercanas al óptimo global en un periodo de tiempo razonable.
 
-_______
+-------
 
-**Equipo 5.**
+**Fecha de Entrega:** Jueves 20 de Mayo del 2021, 23:59 hrs.
 
-
-| Github_User | Alumno |
-|:---:|:---|
-| @lobolc | Miguel |
-| @Carlosrlpzi | Carlos |
-| @ZarCorvus | José Luis |
-
-_______
-
-**Fecha de Entrega:** Domingo 09 de Mayo del 2021, 23:59 hrs.
-
-______
+-------
 
 Para una experiencia interactiva con el código de nuestro repositorio, puedes utilizar el botón [binder](https://mybinder.org/):
 
