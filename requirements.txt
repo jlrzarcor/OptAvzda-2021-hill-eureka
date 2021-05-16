@@ -1,0 +1,8 @@
+scipy
+cvxpy
+sklearn
+pytest
+python-tsp==0.2.0
+pandas
+numba
+ortools==9.0.9048
