@@ -17,13 +17,11 @@
 **Equipo 5.**
 
 
-| Github_User | Alumno |
+| Github_User | Alumno | Rol |
 |:---:|:---|
-| @lobolc | Miguel |
-| @Carlosrlpzi | Carlos |
-| @ZarCorvus | José Luis* |
-
-* _Project Manager_
+| @lobolc | Miguel | Programmer |
+| @Carlosrlpzi | Carlos | Programmer | 
+| @ZarCorvus | José Luis | Reviewer & Project Manager |
 
 -------
 
