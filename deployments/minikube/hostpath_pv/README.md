@@ -195,11 +195,20 @@ minikube delete
 To update package in deployed instance:
 
 ```
-kubectl delete -f $OPT_JUPYTERLAB_SERVICE.yaml
+OPT_JUPYTERLAB_SERVICE=$(echo $OPT_JUPYTERLAB_SERVICE|sed -n 's/\./-/g;s/_/-/g;p')
+kubectl delete deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE
 ```
 
 ```
-kubectl create -f $OPT_JUPYTERLAB_SERVICE.yaml
+OPT_LOAD_BALANCER_SERVICE=loadbalancer-opt-0.1-hostpath-pv
+OPT_PV=hostpath-pv
+OPT_PVC=hostpath-pvc
+OPT_JUPYTERLAB_SERVICE=jupyterlab-opt-0.1-hostpath-pv
+OPT_URL=https://raw.githubusercontent.com/jlrzarcor/OptAvzda-2021-hill-eureka/main/deployments/minikube/
+```
+
+```
+kubectl create -f $OPT_URL/hostpath_pv/$OPT_JUPYTERLAB_SERVICE.yaml
 ```
 
 
