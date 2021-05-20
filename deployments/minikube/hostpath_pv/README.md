@@ -127,7 +127,7 @@ And after 3 mins go to
 
 
 ```
-http://<ipv4 of ec2 instance>:30001/hillandgradiant
+http://<ipv4 of ec2 instance>:30001/tsphillclimbing
 ```
 
 all must be with status "Running" (and one with "Completed")
@@ -142,5 +142,3 @@ kubectl delete deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE
 ```
 
 # JUPYTERLAB SERVICE IS USING DOCKER IMAGE FROM NEXT [Dockerfile](https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka/tree/main/dockerfiles/pkg)
-
-
