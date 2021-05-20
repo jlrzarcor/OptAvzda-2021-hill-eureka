@@ -2,7 +2,8 @@ import time
 import random
 import numpy as np
 import pandas as pd
-from concurrent.futures import ProcessPoolExecutor
+import multiprocessing
+from multiprocessing import Pool
 
 
 def read_data(cities, path_data):
@@ -140,9 +141,9 @@ def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_poi
         
     return global_path, global_solution, time.time() - start
 
-def multiprocessing(func, args, workers):
-    with ProcessPoolExecutor(workers) as ex:
-        res = ex.map(func, args)
+def multiprocessing_f(func, args, workers):
+    with Pool(workers) as ex:
+        res = ex.starmap(func, args)
     return list(res)
 
 def parallel_hc(*argv):
