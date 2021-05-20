@@ -136,11 +136,28 @@ def best_solution(coordinate, initial_point = 0, tolerance = 1e-7, n_restarts = 
 
 
 def multiprocessing_f(func, args, workers):
+    """
+    allows to work with processes through the Pool multiprocessing function.
+        input:
+            func: function to process
+            args: arguments of the functions
+            workers: number of process in parallel
+        output: 
+            res: list
+    """    
     with Pool(workers) as ex:
         res = ex.starmap(func, args)
     return list(res)
 
 def parallel_hc(*argv):
+    """
+    compile our code to run it in parallel 
+        input: 
+            *argv: arguments of the function
+        output:
+            the best route, calculate by our code 
+
+    """    
     lst = []
     lst.append(argv)
     lst = lst * cpu_count()
