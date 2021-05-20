@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEB_BUILD_DEPS="sudo nano less git wget curl python3-dev python3-pip python3-setuptools"
 ENV DEB_PACKAGES=""
 ENV PIP_PACKAGES_COMMON="scipy sklearn"
-#ENV PIP_PACKAGES_KALE="kubeflow-kale==0.6.1"
+ENV PIP_PACKAGES_KALE="kubeflow-kale==0.6.1"
 
 RUN apt-get update && export $DEBIAN_FRONTEND && \
     echo $TIMEZONE > /etc/timezone && apt-get install -y tzdata
