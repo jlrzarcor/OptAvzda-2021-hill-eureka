@@ -4,7 +4,7 @@ import os
 
 os.chdir("../")
 
-from src.hill_cg.hill import *
+from src.hill_cg.hill_mul import *
 from notebooks.google_or_tools_tsp import *
 
 
@@ -14,7 +14,7 @@ dat1 = dat.to_numpy()
 ciudades = dat1[0:10, :]
 
 # Distancia de nuestro de método
-hc_best_dist = best_solution(ciudades)
+hc_best_dist = parallel_hc(10,"datasets/ca4663.tsp") 
 
 
 # Distancia de Google OR-tools
