@@ -100,7 +100,7 @@ def neighbors(matrix, solution):
     return best_neighbor, best_path
 
 
-def best_solution(cities = 20, data_path = "../../datasets/ca4663.tsp", initial_point = 0, tolerance = 1e-7, n_restarts = 300):
+def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_point = 0, tolerance = 1e-7, n_restarts = 300):
     """
     finds an optimal solution for the TSP problem using hill climbing algorithm
         input:
