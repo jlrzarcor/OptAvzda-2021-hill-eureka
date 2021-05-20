@@ -190,6 +190,17 @@ minikube stop
 ```
 minikube delete
 ```
+-------
+
+To update package in deployed instance:
+
+```
+kubectl create -f $OPT_JUPYTERLAB_SERVICE.yaml
+```
+
+```
+kubectl apply -f $OPT_JUPYTERLAB_SERVICE.yaml
+```
 
 
 # JUPYTERLAB SERVICE IS USING DOCKER IMAGE FROM NEXT [Dockerfile](https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka/tree/main/dockerfiles/pkg)
