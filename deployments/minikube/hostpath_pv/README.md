@@ -1,10 +1,15 @@
-# 6.Minikube y AWS
 
-Assumptions: vpc, security groups, .pem key, role must be configured and created. See: [1.1.Configuracion de servicios basicos para uso de AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/1.1.Configuracion-de-servicios-basicos-para-uso-de-AWS)
+# AWS-EC2 intance configuration for **Minikube** and **Kale**
 
+-------
+
+Based on Prof. Erick Palacios Moreno notes at: [6.Minikube y AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/6.Minikube-y-AWS)
+
+> Assumptions: vpc, security groups, .pem key, role must be configured and created. See: [1.1.Configuracion de servicios basicos para uso de AWS](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/1.1.Configuracion-de-servicios-basicos-para-uso-de-AWS)
 For some Kubernetes references see: [What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/), [4.AWS y Kubernetes](https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/wiki/4.AWS-y-Kubernetes), [kubernetes-objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
-
 Here a [video](https://www.youtube.com/watch?v=xL91E3FBgAg) that will guide you through next steps
+
+-------
 
 # **First step**
 
@@ -161,7 +166,9 @@ And after 3 mins go to
 http://<ipv4 of ec2 instance>:30001/tsphillclimbing
 ```
 
-all must be with status "Running" (and one with "Completed")
+-------
+
+**Every time you acces minikube, you must deploy whole services and once you've finished your tasks, you must stop all services. Your current work will remain @ /shared_volume unless you terminate your instance.**
 
 Delete services:
 
