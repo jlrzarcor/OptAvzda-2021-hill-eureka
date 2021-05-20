@@ -109,7 +109,7 @@ def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_poi
             tolerance[float]: value that indicates the solution is not improving
         outputs:
             bst_distance[float]: distance of the best route 
-            best_sol[list]: order the places to be visted in the optimal solution
+            best_sol[liargumentosst]: order the places to be visted in the optimal solution
             time[float]: time that take the algorithm to obtain the solution    
     """
     coordinate = read_data(cities, data_path)
@@ -145,8 +145,10 @@ def multiprocessing(func, args, workers):
         res = ex.map(func, args)
     return list(res)
 
-def parallel_hc(cities):
-    ls = [cities for i in range(12)]
-    routes = multiprocessing(best_solution, ls, 6)
-    routes.sort()
+def parallel_hc(*argv):
+    lst = []
+    lst.append(argv)
+    lst = lst * multiprocessing.cpu_count()
+    wrkrs = multiprocessing.cpu_count()
+    routes = multiprocessing_f(best_solution, lst, wrkrs)
     return routes[0]
