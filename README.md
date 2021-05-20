@@ -18,7 +18,7 @@
 
 
 | Github_User | Alumno | Rol |
-|:---:|:---|
+|:---:|:---|:---|
 | @lobolc | Miguel | Programmer |
 | @Carlosrlpzi | Carlos | Programmer | 
 | @ZarCorvus | José Luis | Reviewer & Project Manager |
@@ -28,7 +28,7 @@
 
 #### Título del proyecto:  
 
-**Implementación y Optimización del método heurístico _Hill Climbing_ para resolver el _Traveling Salesman Problem_ (TSP)**
+### Implementación y Optimización del método heurístico _Hill Climbing_ para resolver el _Traveling Salesman Problem_ (TSP)
 
 #### Objetivo del proyecto:
 
@@ -67,7 +67,7 @@ buscando obtener soluciones más cercanas al óptimo global en un periodo de tie
 Para una experiencia interactiva con el código de nuestro repositorio, puedes utilizar el botón [binder](https://mybinder.org/):
 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/optimizacion-2-2021-1-gh-classroom/practica-2-segunda-parte-jlrzarcor/main?urlpath=lab)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jlrzarcor/OptAvzda-2021-hill-eureka/main?urlpath=lab)
 
 Es necesario instalar nuestro paquete **hill_cg** en este ambiente para poder ejecutar nuestro reporte.
 
@@ -75,7 +75,7 @@ ______
 
 Puedes visitar nuestro sitio para conocer la documentación del paquete en línea:
 
-[paquete_experimental_hill_climbing_conjugate_gradient](https://optimizacion-2-2021-1-gh-classroom.github.io/practica-2-segunda-parte-jlrzarcor/)
+[paquete_experimental_hill_climbing](https://optimizacion-2-2021-1-gh-classroom.github.io/practica-2-segunda-parte-jlrzarcor/)
 
 ______
 
