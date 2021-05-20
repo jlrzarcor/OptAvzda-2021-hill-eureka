@@ -78,10 +78,20 @@ Puedes visitar nuestro sitio para conocer la documentación del paquete en líne
 [paquete_experimental_hill_climbing_conjugate_gradient](https://optimizacion-2-2021-1-gh-classroom.github.io/practica-2-segunda-parte-jlrzarcor/)
 
 ______
+
+**Bibliografía**
+* Russell, Stuart J.; Norvig, Peter (2003), Artificial Intelligence: A Modern Approach (2nd ed.), Upper Saddle River, New Jersey: Prentice Hall, pp. 111–114.
+
 **Referencias:**
-* [Hill climbing](https://en.wikipedia.org/wiki/Hill_climbing)
 * [Hill climbing towards article](https://towardsdatascience.com/how-to-implement-the-hill-climbing-algorithm-in-python-1c65c29469de)
 * [Perfilamiento, Notas del Prof. Erick](https://itam-ds.github.io/analisis-numerico-computo-cientifico/V.optimizacion_de_codigo/5.2/Herramientas_de_lenguajes_y_del_SO_para_perfilamiento_e_implementaciones_de_BLAS.html)
 * [Compilación a C, Notas del Prof. Erick](https://itam-ds.github.io/analisis-numerico-computo-cientifico/V.optimizacion_de_codigo/5.3/Compilacion_a_C.html)
 * [OR tools TSP](https://developers.google.com/optimization/routing/tsp)
-* Russell, Stuart J.; Norvig, Peter (2003), Artificial Intelligence: A Modern Approach (2nd ed.), Upper Saddle River, New Jersey: Prentice Hall, pp. 111–114.
+
+* [Hill climbing, Wikipedia](https://en.wikipedia.org/wiki/Hill_climbing)
+* [Combinatorial optimization, Wikipedia](https://en.wikipedia.org/wiki/Combinatorial_optimization)
+* [Time complexity](https://en.wikipedia.org/wiki/Time_complexity)
+* [NP-completeness, Wikipedia](https://en.wikipedia.org/wiki/NP-completeness)
+* [NP-hardness, Wikipedia](https://en.wikipedia.org/wiki/NP-hardness)
+* [Metaheuristic, Wikipedia](https://en.wikipedia.org/wiki/Metaheuristic)
+* [Travelling salesman problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
