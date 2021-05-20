@@ -6,7 +6,7 @@ os.chdir("../")
 
 from src.hill_cg.hill_mul import *
 from notebooks.google_or_tools_tsp import *
-
+import datasets
 
 
 dat = pd.read_csv("https://raw.githubusercontent.com/optimizacion-2-2021-1-gh-classroom/practica-2-segunda-parte-jlrzarcor/main/datasets/tsp.csv")
