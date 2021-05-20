@@ -28,7 +28,7 @@ RUN pip install $PIP_PACKAGES_COMMON --upgrade
 #RUN pip install $PIP_PACKAGES_KALE --upgrade
 #RUN jupyter labextension install kubeflow-kale-labextension
 
-RUN pip install --quiet "git+.https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka.git#egg=hill_cg&subdirectory=src"
+RUN pip install --quiet "git+https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka.git#egg=hill_cg&subdirectory=src"
 
 
 VOLUME ["/shared_volume"]
