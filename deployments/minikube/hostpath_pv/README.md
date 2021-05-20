@@ -195,11 +195,11 @@ minikube delete
 To update package in deployed instance:
 
 ```
-kubectl create -f $OPT_JUPYTERLAB_SERVICE.yaml
+kubectl delete -f $OPT_JUPYTERLAB_SERVICE.yaml
 ```
 
 ```
-kubectl apply -f $OPT_JUPYTERLAB_SERVICE.yaml
+kubectl create -f $OPT_JUPYTERLAB_SERVICE.yaml
 ```
 
 
