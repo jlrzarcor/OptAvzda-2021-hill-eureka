@@ -28,14 +28,14 @@ RUN pip install $PIP_PACKAGES_COMMON --upgrade
 #RUN pip install $PIP_PACKAGES_KALE --upgrade
 #RUN jupyter labextension install kubeflow-kale-labextension
 
-RUN pip install --quiet "git+https://github.com/optimizacion-2-2021-1-gh-classroom/practica-2-segunda-parte-jlrzarcor.git#egg=tsphillclimbing&subdirectory=src"
+RUN pip install --quiet "git+.https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka.git#egg=hill_cg&subdirectory=src"
 
 
 VOLUME ["/shared_volume"]
 
 WORKDIR /
 
-ENV NB_PREFIX hillandgradient
+ENV NB_PREFIX tsphillclimbing 
 
 ENTRYPOINT ["/usr/local/bin/jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--LabApp.allow_origin='*'", "--LabApp.base_url=tsphillclimbing"]
 
