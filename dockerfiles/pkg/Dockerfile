@@ -25,8 +25,8 @@ RUN jupyter notebook --generate-config && \
         
 
 RUN pip install $PIP_PACKAGES_COMMON --upgrade
-#RUN pip install $PIP_PACKAGES_KALE --upgrade
-#RUN jupyter labextension install kubeflow-kale-labextension
+RUN pip install $PIP_PACKAGES_KALE --upgrade
+RUN jupyter labextension install kubeflow-kale-labextension
 
 RUN pip install --quiet "git+https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka.git#egg=hill_cg&subdirectory=src"
 
