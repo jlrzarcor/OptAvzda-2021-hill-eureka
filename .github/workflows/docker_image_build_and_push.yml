@@ -38,4 +38,4 @@ jobs:
           file: dockerfiles/pkg/Dockerfile #path in repo to Dockerfile
           platforms: linux/amd64
           push: true
-          tags: lobolc/pkg:0.7777777 
+          tags: lobolc/pkg:0.7 
