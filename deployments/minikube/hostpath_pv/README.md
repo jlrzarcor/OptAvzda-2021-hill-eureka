@@ -14,6 +14,8 @@ Select `m5.2xlarge`
 
 # **Second step**
 
+Use next bash script in User data:
+
 ```
 #!/bin/bash
 ##variables:
@@ -30,6 +32,8 @@ aws ec2 create-tags --resources $INSTANCE_ID --tag Key=Name,Value=$name_instance
 # **Third Step**
 
 ssh to instance:
+
+->Enable port 22 in security groups
 
 ```
 ssh -o ServerAliveInterval=60 -i <your key> admin@<ipv4 of ec2 instance>
@@ -89,8 +93,7 @@ http://<ipv4 of ec2 instance>:$INGRESS_PORT
 
 # For Kubeflow namespace next will deploy services:
 
-__Use next bash script in User data:__
-
+-------
 
 Set:
 
@@ -123,6 +126,34 @@ Create deployment:
 kubectl create -f $OPT_URL/hostpath_pv/$OPT_JUPYTERLAB_SERVICE.yaml
 ```
 
+To check set:
+
+```
+OPT_LOAD_BALANCER_SERVICE=$(echo $OPT_LOAD_BALANCER_SERVICE|sed -n 's/\./-/g;s/_/-/g;p')
+OPT_JUPYTERLAB_SERVICE=$(echo $OPT_JUPYTERLAB_SERVICE|sed -n 's/\./-/g;s/_/-/g;p')
+```
+
+Describe:
+
+```
+kubectl describe service -n kubeflow $OPT_LOAD_BALANCER_SERVICE
+kubectl describe pv -n kubeflow $OPT_PV
+kubectl describe pvc -n kubeflow $OPT_PVC
+kubectl describe deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE
+```
+
+Describe all pods:
+
+```
+kubectl describe pods -n kubeflow
+```
+
+Scale: (if created automatically scale is 1)
+
+```
+kubectl scale deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE --replicas=<0 or 1>
+```
+
 And after 3 mins go to
 
 
@@ -132,7 +163,7 @@ http://<ipv4 of ec2 instance>:30001/tsphillclimbing
 
 all must be with status "Running" (and one with "Completed")
 
-Delete:
+Delete services:
 
 ```
 kubectl delete service -n kubeflow $OPT_LOAD_BALANCER_SERVICE
@@ -141,10 +172,17 @@ kubectl delete pv -n kubeflow $OPT_PV
 kubectl delete deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE 
 ```
 
-Scale: (if created automatically scale is 1)
+Delete minikube:
 
 ```
-kubectl scale deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE --replicas=<0 or 1>
+minikube stop
 ```
+
+> until last process has completed, execute:
+
+```
+minikube delete
+```
+
 
 # JUPYTERLAB SERVICE IS USING DOCKER IMAGE FROM NEXT [Dockerfile](https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka/tree/main/dockerfiles/pkg)
