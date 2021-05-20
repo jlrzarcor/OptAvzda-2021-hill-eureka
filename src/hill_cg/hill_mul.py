@@ -4,15 +4,8 @@ import numpy as np
 import pandas as pd
 import multiprocessing
 from multiprocessing import Pool
+from multiprocessing import cpu_count
 
-
-def read_data(cities, path_data):
-    names = ["index","uno","dos"]
-    data = pd.read_csv(path_data, names = names, sep = " ")
-    data.drop(['index'],axis = 1, inplace = True)
-    data.dropna(inplace = True)
-    data_np = data.to_numpy()[0:cities,:]
-    return data_np
 
 def distance_matrix(coordinate):
     """
@@ -25,11 +18,10 @@ def distance_matrix(coordinate):
     """
     matrix = []
     for i in range(len(coordinate)):
-        for j in range(len(coordinate)) :       
+        for j in range(len(coordinate)) :
             p = np.linalg.norm(coordinate[i] - coordinate[j])
             matrix.append(p)
     matrix = np.reshape(matrix, (len(coordinate),len(coordinate)))
-    #print(matrix)
     return matrix
 
 
@@ -62,9 +54,9 @@ def calculate_distance(matrix, solution):
 
         input:
             matrix[array]: distance between points
-            solution[list]: contains a propose random solution 
+            solution[list]: contains a propose random solution
         output:
-            distance[float]: distance cover a propose solution            
+            distance[float]: distance cover a propose solution
     """
     distance = 0
     for i in range(0, len(solution)):
@@ -76,7 +68,7 @@ def neighbors(matrix, solution):
     """
     create neighbors of a propose solution
 
-        input: 
+        input:
             matrix[array]: distance between points
             solution[list]: contains a propose random solution
         output:
@@ -90,10 +82,10 @@ def neighbors(matrix, solution):
             neighbor[i] = solution[j]
             neighbor[j] = solution[i]
             neighbors.append(neighbor)
-            
+
     best_neighbor = neighbors[0]
     best_path = calculate_distance(matrix, best_neighbor)
-    
+
     for neighbor in neighbors:
         current_path = calculate_distance(matrix, neighbor)
         if current_path < best_path:
@@ -101,7 +93,8 @@ def neighbors(matrix, solution):
             best_neighbor = neighbor
     return best_neighbor, best_path
 
-def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_point = 0, tolerance = 1e-7, n_restarts = 100):
+
+def best_solution(coordinate, initial_point = 0, tolerance = 1e-7, n_restarts = 100):
     """
     finds an optimal solution for the TSP problem using hill climbing algorithm
         input:
@@ -110,12 +103,12 @@ def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_poi
             tolerance[float]: value that indicates the solution is not improving
         outputs:
             bst_distance[float]: distance of the best route 
-            best_sol[liargumentosst]: order the places to be visted in the optimal solution
+            best_sol[list]: order the places to be visted in the optimal solution
             time[float]: time that take the algorithm to obtain the solution    
     """
-    coordinate = read_data(cities, data_path)
+    start_time = time.time()
     matrix = distance_matrix(coordinate)
-    start = time.time()
+    
     current_solution = random_solution(matrix, initial_point)
     current_path = calculate_distance(matrix, current_solution)
     neighbor = neighbors(matrix,current_solution)[0]
@@ -139,7 +132,8 @@ def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_poi
         neighbor = neighbors(matrix,current_solution)[0]
         best_neighbor, best_neighbor_path = neighbors(matrix, neighbor)
         
-    return global_path, global_solution, time.time() - start
+    return global_path, global_solution, time.time() - start_time
+
 
 def multiprocessing_f(func, args, workers):
     with Pool(workers) as ex:
@@ -149,7 +143,8 @@ def multiprocessing_f(func, args, workers):
 def parallel_hc(*argv):
     lst = []
     lst.append(argv)
-    lst = lst * multiprocessing.cpu_count()
-    wrkrs = multiprocessing.cpu_count()
+    lst = lst * cpu_count()
+    wrkrs = cpu_count()
     routes = multiprocessing_f(best_solution, lst, wrkrs)
+    routes.sort()
     return routes[0]

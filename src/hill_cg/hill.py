@@ -4,14 +4,6 @@ import pandas as pd
 import numpy as np
 
 
-def read_data(cities, path_data):
-    names = ["index","uno","dos"]
-    data = pd.read_csv(path_data, names = names, sep = " ")
-    data.drop(['index'],axis = 1, inplace = True)
-    data.dropna(inplace = True)
-    data_np = data.to_numpy()[0:cities,:]
-    return data_np
-
 def distance_matrix(coordinate):
     """
     calculate the distance among each suggest solution point
@@ -100,7 +92,7 @@ def neighbors(matrix, solution):
     return best_neighbor, best_path
 
 
-def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_point = 0, tolerance = 1e-7, n_restarts = 300):
+def best_solution(coordinate, initial_point = 0, tolerance = 1e-7, n_restarts = 300):
     """
     finds an optimal solution for the TSP problem using hill climbing algorithm
         input:
@@ -112,7 +104,7 @@ def best_solution(cities = 20, data_path = "../datasets/ca4663.tsp", initial_poi
             best_sol[list]: order the places to be visted in the optimal solution
             time[float]: time that take the algorithm to obtain the solution    
     """
-    coordinate = read_data(cities, data_path)
+    
     matrix = distance_matrix(coordinate)
     start = time.time()
     current_solution = random_solution(matrix, initial_point)
