@@ -141,4 +141,10 @@ kubectl delete pv -n kubeflow $OPT_PV
 kubectl delete deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE 
 ```
 
+Scale: (if created automatically scale is 1)
+
+```
+kubectl scale deployment -n kubeflow $OPT_JUPYTERLAB_SERVICE --replicas=<0 or 1>
+```
+
 # JUPYTERLAB SERVICE IS USING DOCKER IMAGE FROM NEXT [Dockerfile](https://github.com/jlrzarcor/OptAvzda-2021-hill-eureka/tree/main/dockerfiles/pkg)
