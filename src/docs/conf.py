@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = '"hill_cg"'
-copyright = '2021, "ITAM-OptAvnzda. Prof. Erick Palacios Moreno. Equipo05"'
+copyright = '2021, "ITAM-OptAvanzada. Prof. Erick Palacios Moreno. Equipo05"'
 author = '"equipo 05", "MLC, CR, JLRZC'
 master_doc = 'index'
 add_module_names = False
