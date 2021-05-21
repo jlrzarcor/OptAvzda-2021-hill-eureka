@@ -75,7 +75,7 @@ ______
 
 Puedes visitar nuestro sitio para conocer la documentación del paquete en línea:
 
-[paquete_experimental_hill_climbing](https://optimizacion-2-2021-1-gh-classroom.github.io/practica-2-segunda-parte-jlrzarcor/)
+[paquete_experimental_hill_climbing](https://jlrzarcor.github.io/OptAvzda-2021-hill-eureka/)
 
 ______
 
