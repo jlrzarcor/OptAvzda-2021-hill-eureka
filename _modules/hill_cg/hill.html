@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hill_cg.hill &#8212; &#34;hill_cg&#34; 0.7 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">&#34;hill_cg&#34; 0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hill_cg.hill</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for hill_cg.hill</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="distance_matrix"><a class="viewcode-back" href="../../_autosummary/hill_cg.hill.distance_matrix.html#hill_cg.hill.distance_matrix">[docs]</a><span class="k">def</span> <span class="nf">distance_matrix</span><span class="p">(</span><span class="n">coordinate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    calculate the distance among each suggest solution point</span>
+
+<span class="sd">        input:</span>
+<span class="sd">            coordinate[array]: array containig the points to be visited</span>
+<span class="sd">        outputs:</span>
+<span class="sd">            matrix[array]: nxn array with distances among solution points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinate</span><span class="p">))</span> <span class="p">:</span>       
+            <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">coordinate</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">coordinate</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinate</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)))</span>
+    <span class="c1">#print(matrix)</span>
+    <span class="k">return</span> <span class="n">matrix</span></div>
+
+
+<div class="viewcode-block" id="random_solution"><a class="viewcode-back" href="../../_autosummary/hill_cg.hill.random_solution.html#hill_cg.hill.random_solution">[docs]</a><span class="k">def</span> <span class="nf">random_solution</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">initial_point</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create a random solution with the places to be visited</span>
+
+<span class="sd">        input:</span>
+<span class="sd">            matrix[array]: distance between points</span>
+<span class="sd">            initial_point[integer]: number of the place to be visited first</span>
+<span class="sd">        output:</span>
+<span class="sd">            temp_solution[list]: creates random solution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)))</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_point</span><span class="p">]</span>
+    <span class="n">points</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">initial_point</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">random_point</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random_point</span><span class="p">)</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">random_point</span><span class="p">)</span>
+    <span class="n">solution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">solution</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_distance"><a class="viewcode-back" href="../../_autosummary/hill_cg.hill.calculate_distance.html#hill_cg.hill.calculate_distance">[docs]</a><span class="k">def</span> <span class="nf">calculate_distance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    returns the distance associated with a solution</span>
+
+<span class="sd">        input:</span>
+<span class="sd">            matrix[array]: distance between points</span>
+<span class="sd">            solution[list]: contains a propose random solution </span>
+<span class="sd">        output:</span>
+<span class="sd">            distance[float]: distance cover a propose solution            </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">)):</span>
+        <span class="n">distance</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">solution</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">solution</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">distance</span></div>
+
+
+<div class="viewcode-block" id="neighbors"><a class="viewcode-back" href="../../_autosummary/hill_cg.hill.neighbors.html#hill_cg.hill.neighbors">[docs]</a><span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create neighbors of a propose solution</span>
+
+<span class="sd">        input: </span>
+<span class="sd">            matrix[array]: distance between points</span>
+<span class="sd">            solution[list]: contains a propose random solution</span>
+<span class="sd">        output:</span>
+<span class="sd">            best_neighbor[list]: contains the best neighbor of he current solution</span>
+<span class="sd">            best_path[float]: distance cover by the best_neighbor route</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">neighbor</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">neighbor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">neighbor</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+            
+    <span class="n">best_neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">best_path</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">best_neighbor</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+        <span class="n">current_path</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_path</span> <span class="o">&lt;</span> <span class="n">best_path</span><span class="p">:</span>
+            <span class="n">best_path</span> <span class="o">=</span> <span class="n">current_path</span>
+            <span class="n">best_neighbor</span> <span class="o">=</span> <span class="n">neighbor</span>
+    <span class="k">return</span> <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_path</span></div>
+
+
+<div class="viewcode-block" id="best_solution"><a class="viewcode-back" href="../../_autosummary/hill_cg.hill.best_solution.html#hill_cg.hill.best_solution">[docs]</a><span class="k">def</span> <span class="nf">best_solution</span><span class="p">(</span><span class="n">coordinate</span><span class="p">,</span> <span class="n">initial_point</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">,</span> <span class="n">n_restarts</span> <span class="o">=</span> <span class="mi">300</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    finds an optimal solution for the TSP problem using hill climbing algorithm</span>
+<span class="sd">        input:</span>
+<span class="sd">            points[array]: coordinates of the places to be visited </span>
+<span class="sd">            initial_point[integer]: number of the place to be visited first</span>
+<span class="sd">            tolerance[float]: value that indicates the solution is not improving</span>
+<span class="sd">        outputs:</span>
+<span class="sd">            bst_distance[float]: distance of the best route </span>
+<span class="sd">            best_sol[list]: order the places to be visted in the optimal solution</span>
+<span class="sd">            time[float]: time that take the algorithm to obtain the solution    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">current_solution</span> <span class="o">=</span> <span class="n">random_solution</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">initial_point</span><span class="p">)</span>
+    <span class="n">current_path</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">)</span>
+    <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span><span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+    <span class="n">global_path</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">current_path</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_restarts</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">best_neighbor_path</span> <span class="o">&lt;</span> <span class="n">current_path</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_neighbor_path</span> <span class="o">-</span> <span class="n">current_path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="n">current_solution</span> <span class="o">=</span> <span class="n">best_neighbor</span>
+                <span class="n">current_path</span> <span class="o">=</span> <span class="n">best_neighbor_path</span>
+                <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+                
+        <span class="k">if</span> <span class="n">current_path</span> <span class="o">&lt;</span> <span class="n">global_path</span><span class="p">:</span>
+            <span class="n">global_path</span> <span class="o">=</span> <span class="n">current_path</span>
+            <span class="n">global_solution</span> <span class="o">=</span> <span class="n">current_solution</span>
+
+        <span class="n">current_solution</span> <span class="o">=</span> <span class="n">random_solution</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">initial_point</span><span class="p">)</span>
+        <span class="n">current_path</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">)</span>
+        <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span><span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">global_path</span><span class="p">,</span> <span class="n">global_solution</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">&#34;hill_cg&#34; 0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">hill_cg.hill</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, &#34;ITAM-OptAvanzada. Prof. Erick Palacios Moreno. Equipo05&#34;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

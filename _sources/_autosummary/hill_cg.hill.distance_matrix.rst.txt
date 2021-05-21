@@ -1,0 +1,6 @@
+﻿hill\_cg.hill.distance\_matrix
+==============================
+
+.. currentmodule:: hill_cg.hill
+
+.. autofunction:: distance_matrix

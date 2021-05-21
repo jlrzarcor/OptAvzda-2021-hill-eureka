@@ -1,0 +1,6 @@
+﻿hill\_cg.hill.best\_solution
+============================
+
+.. currentmodule:: hill_cg.hill
+
+.. autofunction:: best_solution

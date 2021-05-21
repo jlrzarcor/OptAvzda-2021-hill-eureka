@@ -1,0 +1,6 @@
+﻿hill\_cg.hill\_mul.multiprocessing\_f
+=====================================
+
+.. currentmodule:: hill_cg.hill_mul
+
+.. autofunction:: multiprocessing_f

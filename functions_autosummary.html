@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functions &#8212; &#34;hill_cg&#34; 0.7 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hill_cg.hill.distance_matrix" href="_autosummary/hill_cg.hill.distance_matrix.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="_autosummary/hill_cg.hill.distance_matrix.html" title="hill_cg.hill.distance_matrix"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">&#34;hill_cg&#34; 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Functions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="optimized-hill-climbing-random-restart-module">
+<h2>Optimized Hill Climbing Random Restart Module<a class="headerlink" href="#optimized-hill-climbing-random-restart-module" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill.distance_matrix.html#hill_cg.hill.distance_matrix" title="hill_cg.hill.distance_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill.distance_matrix</span></code></a>(coordinate)</p></td>
+<td><p>calculate the distance among each suggest solution point</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill.random_solution.html#hill_cg.hill.random_solution" title="hill_cg.hill.random_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill.random_solution</span></code></a>(matrix, initial_point)</p></td>
+<td><p>create a random solution with the places to be visited</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill.calculate_distance.html#hill_cg.hill.calculate_distance" title="hill_cg.hill.calculate_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill.calculate_distance</span></code></a>(matrix, solution)</p></td>
+<td><p>returns the distance associated with a solution</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill.neighbors.html#hill_cg.hill.neighbors" title="hill_cg.hill.neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill.neighbors</span></code></a>(matrix, solution)</p></td>
+<td><p>create neighbors of a propose solution</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill.best_solution.html#hill_cg.hill.best_solution" title="hill_cg.hill.best_solution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill.best_solution</span></code></a>(coordinate[, …])</p></td>
+<td><p>finds an optimal solution for the TSP problem using hill climbing algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill_mul.multiprocessing_f.html#hill_cg.hill_mul.multiprocessing_f" title="hill_cg.hill_mul.multiprocessing_f"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill_mul.multiprocessing_f</span></code></a>(func, args, workers)</p></td>
+<td><p>allows to work with processes through the Pool multiprocessing function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/hill_cg.hill_mul.parallel_hc.html#hill_cg.hill_mul.parallel_hc" title="hill_cg.hill_mul.parallel_hc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hill_mul.parallel_hc</span></code></a>(*argv)</p></td>
+<td><p>compile our code to run it in parallel</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Functions</a><ul>
+<li><a class="reference internal" href="#optimized-hill-climbing-random-restart-module">Optimized Hill Climbing Random Restart Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="_autosummary/hill_cg.hill.distance_matrix.html"
+                        title="next chapter">hill_cg.hill.distance_matrix</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/functions_autosummary.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="_autosummary/hill_cg.hill.distance_matrix.html" title="hill_cg.hill.distance_matrix"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">&#34;hill_cg&#34; 0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Functions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, &#34;ITAM-OptAvanzada. Prof. Erick Palacios Moreno. Equipo05&#34;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
