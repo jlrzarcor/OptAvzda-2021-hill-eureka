@@ -19,7 +19,8 @@ jobs:
     # ===============================
       run: |
         mkdir src/docs/_build && mkdir src/docs/_autosummary && mkdir src/docs/_static && mkdir src/docs/_templates && chmod gou+wrx -R src/docs
-        docker run -v $(pwd):/datos --entrypoint /bin/bash --rm palmoreck/jupyterlab_optimizacion_2:3.0.0 -c "export PATH=$PATH:/home/miuser/.local/bin/ && cd /datos/src &>    - name: GitHub Pages action
+	docker run -v $(pwd):/datos --entrypoint /bin/bash --rm palmoreck/jupyterlab_optimizacion_2:3.0.0 -c "export PATH=$PATH:/home/miuser/.local/bin/ && cd /datos/src && python3 -m pip install --upgrade pip && pip install sphinx_rtd_theme && pip install . && cd ../src/docs && make html"
+    - name: GitHub Pages action
       uses: peaceiris/actions-gh-pages@v3.7.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
