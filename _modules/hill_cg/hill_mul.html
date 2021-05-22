@@ -131,17 +131,18 @@
     <span class="k">return</span> <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_path</span>
 
 
-<span class="k">def</span> <span class="nf">best_solution</span><span class="p">(</span><span class="n">coordinate</span><span class="p">,</span> <span class="n">initial_point</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">1e-7</span><span class="p">,</span> <span class="n">n_restarts</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">best_solution</span><span class="p">(</span><span class="n">coordinate</span><span class="p">,</span> <span class="n">initial_point</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.97</span><span class="p">,</span> <span class="n">n_restarts</span> <span class="o">=</span> <span class="mi">150</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    finds an optimal solution for the TSP problem using hill climbing algorithm</span>
 <span class="sd">        input:</span>
-<span class="sd">            points[array]: coordinates of the places to be visited </span>
-<span class="sd">            initial_point[integer]: number of the place to be visited first</span>
-<span class="sd">            tolerance[float]: value that indicates the solution is not improving</span>
+<span class="sd">            coordinate[array]: coordinates of the places to be visited. </span>
+<span class="sd">            initial_point[integer]: number of the place to be visited first.</span>
+<span class="sd">            tolerance[float]: it&#39;s a quotient that determines the level of improvement between new propose solution and the current solution.</span>
+<span class="sd">            n_restarts[int]: number of random-restarts.</span>
 <span class="sd">        outputs:</span>
-<span class="sd">            bst_distance[float]: distance of the best route </span>
-<span class="sd">            best_sol[list]: order the places to be visted in the optimal solution</span>
-<span class="sd">            time[float]: time that take the algorithm to obtain the solution    </span>
+<span class="sd">            bst_distance[float]: distance of the best route.</span>
+<span class="sd">            best_sol[list]: order the places to be visited in the optimal solution.</span>
+<span class="sd">            time[float]: time that take the algorithm to obtain a feasible solution.    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">matrix</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
@@ -151,15 +152,19 @@
     <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span><span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
     <span class="n">global_path</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">current_path</span>
-    
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_restarts</span><span class="p">):</span>
-        <span class="k">while</span> <span class="n">best_neighbor_path</span> <span class="o">&lt;</span> <span class="n">current_path</span><span class="p">:</span>
-            <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_neighbor_path</span> <span class="o">-</span> <span class="n">current_path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
-                <span class="n">current_solution</span> <span class="o">=</span> <span class="n">best_neighbor</span>
-                <span class="n">current_path</span> <span class="o">=</span> <span class="n">best_neighbor_path</span>
-                <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
-                
+        <span class="k">while</span> <span class="n">best_neighbor_path</span> <span class="o">&lt;=</span> <span class="n">current_path</span> <span class="ow">and</span> <span class="p">(</span><span class="n">best_neighbor_path</span> <span class="o">/</span> <span class="n">current_path</span> <span class="o">&lt;</span> <span class="n">tolerance</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">):</span>
+                        
+            <span class="n">current_solution</span> <span class="o">=</span> <span class="n">best_neighbor</span>
+            <span class="n">current_path</span> <span class="o">=</span> <span class="n">best_neighbor_path</span>
+            <span class="n">neighbor</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">current_solution</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">best_neighbor</span><span class="p">,</span> <span class="n">best_neighbor_path</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">best_neighbor_path</span> <span class="o">/</span> <span class="n">current_path</span> <span class="o">&gt;=</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">best_neighbor_path</span> <span class="o">/</span> <span class="n">current_path</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+                   
         <span class="k">if</span> <span class="n">current_path</span> <span class="o">&lt;</span> <span class="n">global_path</span><span class="p">:</span>
             <span class="n">global_path</span> <span class="o">=</span> <span class="n">current_path</span>
             <span class="n">global_solution</span> <span class="o">=</span> <span class="n">current_solution</span>

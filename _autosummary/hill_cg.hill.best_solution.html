@@ -46,16 +46,17 @@
 <h1>hill_cg.hill.best_solution<a class="headerlink" href="#hill-cg-hill-best-solution" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="hill_cg.hill.best_solution">
-<code class="sig-name descname">best_solution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinate</span></em>, <em class="sig-param"><span class="n">initial_point</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">1e-07</span></em>, <em class="sig-param"><span class="n">n_restarts</span><span class="o">=</span><span class="default_value">300</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hill_cg/hill.html#best_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hill_cg.hill.best_solution" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">best_solution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coordinate</span></em>, <em class="sig-param"><span class="n">initial_point</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">0.97</span></em>, <em class="sig-param"><span class="n">n_restarts</span><span class="o">=</span><span class="default_value">150</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hill_cg/hill.html#best_solution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hill_cg.hill.best_solution" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>finds an optimal solution for the TSP problem using hill climbing algorithm</dt><dd><dl class="simple">
-<dt>input:</dt><dd><p>points[array]: coordinates of the places to be visited
-initial_point[integer]: number of the place to be visited first
-tolerance[float]: value that indicates the solution is not improving</p>
+<dt>input:</dt><dd><p>coordinate[array]: coordinates of the places to be visited.
+initial_point[integer]: number of the place to be visited first.
+tolerance[float]: it’s a quotient that determines the level of improvement between new propose solution and the current solution.
+n_restarts[int]: number of random-restarts.</p>
 </dd>
-<dt>outputs:</dt><dd><p>bst_distance[float]: distance of the best route
-best_sol[list]: order the places to be visted in the optimal solution
-time[float]: time that take the algorithm to obtain the solution</p>
+<dt>outputs:</dt><dd><p>bst_distance[float]: distance of the best route.
+best_sol[list]: order the places to be visited in the optimal solution.
+time[float]: time that take the algorithm to obtain a feasible solution.</p>
 </dd>
 </dl>
 </dd>

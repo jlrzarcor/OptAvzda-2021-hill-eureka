@@ -4,7 +4,7 @@
 Functions
 *********
       
-Optimized Hill Climbing Random Restart Module
+Optimized Hill Climbing Random_Restart Module
 =============================================
 
 .. autosummary::
