@@ -70,6 +70,8 @@ Para una experiencia interactiva con el código de nuestro repositorio, puedes u
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jlrzarcor/OptAvzda-2021-hill-eureka/main?urlpath=lab)
 
 Es necesario instalar nuestro paquete **hill_cg** en este ambiente para poder ejecutar nuestro reporte.
+    
+*Nota*: Una vez instalado nuestro paquete es necesario instalar los paquetes requeridos para correrlo con la instrucción `pip install -r  requirements.txt`.
 
 ______
 
