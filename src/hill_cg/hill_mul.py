@@ -94,17 +94,18 @@ def neighbors(matrix, solution):
     return best_neighbor, best_path
 
 
-def best_solution(coordinate, initial_point = 0, tolerance = 1e-7, n_restarts = 100):
+def best_solution(coordinate, initial_point = 0, tolerance = 0.97, n_restarts = 150):
     """
     finds an optimal solution for the TSP problem using hill climbing algorithm
         input:
-            points[array]: coordinates of the places to be visited 
-            initial_point[integer]: number of the place to be visited first
-            tolerance[float]: value that indicates the solution is not improving
+            coordinate[array]: coordinates of the places to be visited. 
+            initial_point[integer]: number of the place to be visited first.
+            tolerance[float]: it's a quotient that determines the level of improvement between new propose solution and the current solution.
+            n_restarts[int]: number of random-restarts.
         outputs:
-            bst_distance[float]: distance of the best route 
-            best_sol[list]: order the places to be visted in the optimal solution
-            time[float]: time that take the algorithm to obtain the solution    
+            bst_distance[float]: distance of the best route.
+            best_sol[list]: order the places to be visited in the optimal solution.
+            time[float]: time that take the algorithm to obtain a feasible solution.    
     """
     start_time = time.time()
     matrix = distance_matrix(coordinate)
@@ -114,15 +115,19 @@ def best_solution(coordinate, initial_point = 0, tolerance = 1e-7, n_restarts = 
     neighbor = neighbors(matrix,current_solution)[0]
     best_neighbor, best_neighbor_path = neighbors(matrix, neighbor)
     global_path = 2 * current_path
-    
+    k = 0
     for _ in range(n_restarts):
-        while best_neighbor_path < current_path:
-            while abs(best_neighbor_path - current_path) > tolerance:
-                current_solution = best_neighbor
-                current_path = best_neighbor_path
-                neighbor = neighbors(matrix, current_solution)[0]
-                best_neighbor, best_neighbor_path = neighbors(matrix, neighbor)
-                
+        while best_neighbor_path <= current_path and (best_neighbor_path / current_path < tolerance or k < 7):
+                        
+            current_solution = best_neighbor
+            current_path = best_neighbor_path
+            neighbor = neighbors(matrix, current_solution)[0]
+            best_neighbor, best_neighbor_path = neighbors(matrix, neighbor)
+            if best_neighbor_path / current_path >= tolerance:
+                k +=1
+            if best_neighbor_path / current_path < tolerance:
+                k = 0
+                   
         if current_path < global_path:
             global_path = current_path
             global_solution = current_solution
