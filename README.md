@@ -71,7 +71,7 @@ Para una experiencia interactiva con el código de nuestro repositorio, puedes u
 
 Es necesario instalar nuestro paquete **hill_cg** en este ambiente para poder ejecutar nuestro reporte.
     
-*Nota*: Una vez instalado nuestro paquete es necesario instalar los paquetes requeridos para correrlo con la instrucción `pip install -r  requirements.txt`.
+**Nota**: Una vez instalado nuestro paquete es necesario instalar los paquetes requeridos para correrlo con la instrucción `pip install -r  requirements.txt`.
 
 ______
 
